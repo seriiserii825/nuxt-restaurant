@@ -12,7 +12,8 @@ const errors = ref({
 
 async function onSubmit(){
   try {
-    // const response = await axiosInstance.post("/admin/login", form.value);
+    await axiosInstance.post("/admin/forgot-password", form.value);
+    useSweetAlert('success', 'Email sent', 'Please check your email for the reset password link');
   } catch (error) {
     handleAxiosError(error);
   }
