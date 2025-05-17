@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import {useUserStore} from '~/store/useUserStore';
+
 definePageMeta({
   layout: "admin",
 });
+
+const user_store = useUserStore();
+const router = useRouter();
 
 const form = ref({
   email: "",
@@ -16,6 +21,11 @@ async function onSubmit(){
   try {
     const response = await axiosInstance.post("/admin/login", form.value);
     console.log(response);
+    localStorage.setItem("token", response.data.token);
+    const cookie_user = useCookie("user");
+    cookie_user.value = JSON.stringify(response.data.user);
+    user_store.setUser(response.data.user);
+    router.push('/admin/dashboard');
     useSweetAlert('success', 'Login successful', 'You have successfully logged in');
   } catch (error) {
     handleAxiosError(error);
