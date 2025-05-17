@@ -14,11 +14,20 @@ const errors = ref({
   password_confirmation: "",
 });
 
+async function onSubmit(){
+  try {
+    const response = await axiosInstance.post("/admin/login", form.value);
+    console.log(response);
+  } catch (error) {
+    handleAxiosError(error);
+  }
+}
 </script>
 
 <template>
-  <div class="container">
-    <form class="m-auto w-50">
+  <div class="container pt-5">
+    <h2 class="text-center fw-bold">Login</h2>
+    <form @submit.prevent="onSubmit" class="m-auto w-50 pt-5">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
