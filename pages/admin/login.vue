@@ -3,6 +3,7 @@ import {useUserStore} from '~/store/useUserStore';
 
 definePageMeta({
   layout: "admin",
+  middleware: ["admin"]
 });
 
 const user_store = useUserStore();

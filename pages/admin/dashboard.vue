@@ -1,25 +1,12 @@
 <script setup lang="ts">
-import {useUserStore} from '~/store/useUserStore';
-
 definePageMeta({
   layout: "admin",
+  middleware: ["admin"]
 });
-const user_store = useUserStore();
-const router = useRouter();
 
-async function logout(){
-  try {
-    await axiosInstance.post("/admin/logout");
-    localStorage.removeItem("token");
-    const cookie_user = useCookie("user");
-    cookie_user.value = null;
-    user_store.setUser(null);
-    useSweetAlert('success', 'Logout successful', 'You have successfully logged out');
-    router.push('/admin/login');
-  } catch (error) {
-    
-  }
-}
+onMounted(() => {
+  useRouteAlert('Login failed')
+});
 </script>
 <template>
   <div class="dashboard">
@@ -30,7 +17,7 @@ async function logout(){
         dignissimos dolorem, ab minus accusamus doloremque itaque illum recusandae, possimus hic
         nobis perspiciatis culpa. Eligendi, ullam minus?
       </p>
-      <a @click.prevent="logout" href="#" class="btn btn-success">Logout</a>
+      <a @click.prevent="useLogout" href="#" class="btn btn-success">Logout</a>
     </div>
   </div>
 </template>
