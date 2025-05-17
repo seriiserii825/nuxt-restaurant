@@ -6,18 +6,17 @@ definePageMeta({
 const form = ref({
   email: "",
   password: "",
-  password_confirmation: "",
 });
 const errors = ref({
   email: "",
   password: "",
-  password_confirmation: "",
 });
 
 async function onSubmit(){
   try {
     const response = await axiosInstance.post("/admin/login", form.value);
     console.log(response);
+    useSweetAlert('success', 'Login successful', 'You have successfully logged in');
   } catch (error) {
     handleAxiosError(error);
   }
@@ -42,11 +41,6 @@ async function onSubmit(){
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input v-model="form.password" type="password" class="form-control" id="exampleInputPassword1" />
         <span class="text-danger" v-if="errors.password">{{ errors.password }}</span>
-      </div>
-      <div class="mb-3">
-        <label for="password_confirmation" class="form-label">Password Confirmation</label>
-        <input v-model="form.password_confirmation" type="password" class="form-control" id="password_confirmation" />
-        <span class="text-danger" v-if="errors.password_confirmation">{{ errors.password_confirmation }}</span>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
