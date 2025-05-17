@@ -42,6 +42,7 @@ async function onSubmit(){
         <input
           type="email"
           v-model="form.email"
+          name="email"
           class="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp" />
@@ -49,7 +50,7 @@ async function onSubmit(){
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input v-model="form.password" type="password" class="form-control" id="exampleInputPassword1" />
+        <input v-model="form.password" name="password" type="password" class="form-control" id="exampleInputPassword1" />
         <span class="text-danger" v-if="errors.password">{{ errors.password }}</span>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
