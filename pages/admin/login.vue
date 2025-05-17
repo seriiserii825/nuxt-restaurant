@@ -54,6 +54,9 @@ async function onSubmit(){
         <input v-model="form.password" name="password" type="password" class="form-control" id="exampleInputPassword1" />
         <span class="text-danger" v-if="errors.password">{{ errors.password }}</span>
       </div>
+      <div class="mb-3">
+        <NuxtLink to="/admin/forgot-password" class="text-decoration-none">Forgot Password?</NuxtLink>
+      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
