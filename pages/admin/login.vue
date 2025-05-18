@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {useUserStore} from '~/store/useUserStore';
+import { useUserStore } from "~/store/useUserStore";
 
 definePageMeta({
   layout: "auth",
-  middleware: ["admin"]
+  middleware: ["admin"],
 });
 
 const user_store = useUserStore();
@@ -18,7 +18,7 @@ const errors = ref({
   password: "",
 });
 
-async function onSubmit(){
+async function onSubmit() {
   try {
     const response = await axiosInstance.post("/admin/login", form.value);
     console.log(response);
@@ -26,8 +26,8 @@ async function onSubmit(){
     const cookie_user = useCookie("user");
     cookie_user.value = JSON.stringify(response.data.user);
     user_store.setUser(response.data.user);
-    router.push('/admin/dashboard');
-    useSweetAlert('success', 'Login successful', 'You have successfully logged in');
+    router.push("/admin/dashboard");
+    useSweetAlert("success", "Login successful", "You have successfully logged in");
   } catch (error) {
     handleAxiosError(error);
   }
@@ -35,29 +35,48 @@ async function onSubmit(){
 </script>
 
 <template>
-  <div class="container">
-    <h2 class="fw-bold mb-3">Login</h2>
-    <form @submit.prevent="onSubmit">
+  <div class="auth-content my-auto">
+    <div class="text-center">
+      <h5 class="mb-0">Welcome Back !</h5>
+      <p class="text-muted mt-2">Sign in to continue to Minia.</p>
+    </div>
+    <form @submit.prevent="onSubmit" class="mt-4 pt-2">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input
-          type="email"
+        <FormInput
           v-model="form.email"
+          :label="'Email'"
+          :placeholder="'Enter email'"
+          type="email"
           name="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp" />
-        <span class="text-danger" v-if="errors.email">{{ errors.email }}</span>
+          :error="errors.email" />
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input v-model="form.password" name="password" type="password" class="form-control" id="exampleInputPassword1" />
-        <span class="text-danger" v-if="errors.password">{{ errors.password }}</span>
+        <FormInput
+          v-model="form.password"
+          :label="'Password'"
+          :placeholder="'Enter password'"
+          type="password"
+          name="password"
+          :error="errors.password" />
       </div>
       <div class="mb-3">
-        <NuxtLink to="/admin/forgot-password" class="text-decoration-none">Forgot Password?</NuxtLink>
+        <div class="d-flex align-items-start">
+          <div class="flex-shrink-0">
+            <div class="">
+              <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="mb-3">
+        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
+      </div>
     </form>
+    <div class="mt-5 text-center">
+      <p class="text-muted mb-0">
+        Don't have an account ?
+        <a href="auth-register.html" class="text-primary fw-semibold">Signup now</a>
+      </p>
+    </div>
   </div>
 </template>
