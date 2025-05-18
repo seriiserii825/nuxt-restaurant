@@ -63,7 +63,7 @@ async function onSubmit() {
         <div class="d-flex align-items-start">
           <div class="flex-shrink-0">
             <div class="">
-              <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
+              <NuxtLink to="/admin/forgot-password" class="text-muted">Forgot password?</NuxtLink>
             </div>
           </div>
         </div>

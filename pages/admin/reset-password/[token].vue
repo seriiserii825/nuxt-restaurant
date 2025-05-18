@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+definePageMeta({
+  layout: "auth",
+});
 
 const route = useRoute();
 const router = useRouter();
@@ -17,11 +19,11 @@ const errors = ref({
   password_confirmation: "",
 });
 
-async function onSubmit(){
+async function onSubmit() {
   try {
     await axiosInstance.post("/admin/reset-password", form.value);
-    useSweetAlert('success', 'Password reset', 'Your password has been reset successfully');
-    router.push('/admin/login');
+    useSweetAlert("success", "Password reset", "Your password has been reset successfully");
+    router.push("/admin/login");
   } catch (error) {
     handleAxiosError(error);
   }
@@ -29,20 +31,43 @@ async function onSubmit(){
 </script>
 
 <template>
-  <div class="password-reset">
-    <h2 class="text-center fw-bold">Reset Password</h2>
-    <form @submit.prevent="onSubmit" class="m-auto w-50 pt-5">
+  <div class="auth-content my-auto">
+    <div class="text-center">
+      <h5 class="mb-0">Change password</h5>
+    </div>
+    <form @submit.prevent="onSubmit" class="mt-4 pt-2">
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input v-model="form.password" name="password" type="password" class="form-control" id="exampleInputPassword1" />
-        <span class="text-danger" v-if="errors.password">{{ errors.password }}</span>
+        <FormInput
+          v-model="form.email"
+          :label="'Email'"
+          :placeholder="'Enter email'"
+          type="email"
+          name="email"
+          :error="errors.email" />
       </div>
       <div class="mb-3">
-        <label for="password_confirmation" class="form-label">Password Confirmation</label>
-        <input v-model="form.password_confirmation" name="password_confirmation" type="password" class="form-control" id="password_confirmation" />
-        <span class="text-danger" v-if="errors.password">{{ errors.password_confirmation }}</span>
+        <FormInput
+          v-model="form.password"
+          :label="'Password'"
+          :placeholder="'Enter password'"
+          type="password"
+          name="password"
+          :error="errors.password" />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="mb-3">
+        <FormInput
+          v-model="form.password_confirmation"
+          :label="'Confirm password'"
+          :placeholder="'Enter password again'"
+          type="password"
+          name="password_confirmation"
+          :error="errors.password_confirmation" />
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">
+          Change password
+        </button>
+      </div>
     </form>
   </div>
 </template>

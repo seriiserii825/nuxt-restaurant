@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: "admin",
+  layout: "auth",
 });
 
 const form = ref({
@@ -21,21 +21,23 @@ async function onSubmit(){
 </script>
 
 <template>
-  <div class="container pt-5">
-    <h2 class="text-center fw-bold">Forgot password</h2>
-    <form @submit.prevent="onSubmit" class="m-auto w-50 pt-5">
+  <div class="auth-content my-auto">
+    <div class="text-center">
+      <h5 class="mb-0">Send email</h5>
+    </div>
+    <form @submit.prevent="onSubmit" class="mt-4 pt-2">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input
-          type="email"
+        <FormInput
           v-model="form.email"
+          :label="'Email'"
+          :placeholder="'Enter email'"
+          type="email"
           name="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp" />
-        <span class="text-danger" v-if="errors.email">{{ errors.email }}</span>
+          :error="errors.email" />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="mb-3">
+        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Resset password</button>
+      </div>
     </form>
   </div>
 </template>
