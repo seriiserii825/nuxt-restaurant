@@ -2,7 +2,7 @@
 import {useUserStore} from '~/store/useUserStore';
 
 definePageMeta({
-  layout: "admin",
+  layout: "auth",
   middleware: ["admin"]
 });
 
@@ -35,9 +35,9 @@ async function onSubmit(){
 </script>
 
 <template>
-  <div class="container pt-5">
-    <h2 class="text-center fw-bold">Login</h2>
-    <form @submit.prevent="onSubmit" class="m-auto w-50 pt-5">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Login</h2>
+    <form @submit.prevent="onSubmit">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
