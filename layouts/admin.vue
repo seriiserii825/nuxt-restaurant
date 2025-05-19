@@ -12,14 +12,17 @@ useHead({
     {
       rel: "stylesheet",
       href: "/backend/assets/css/app.min.css",
-    }
+    },
   ],
 });
+useGetUserApi();
 </script>
 <template>
   <div class="admin-layout">
     <AdminHeader />
     <AdminSidebar />
-    <slot />
+    <div style="padding-left: 250px;">
+      <slot />
+    </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
 import {useUserStore} from "~/store/useUserStore";
 
-export default async function useGetUserApi() {
+export default async function useGetUserApi(url="/admin/user") {
   const user_store = useUserStore();
   try {
-    const data = await axiosInstance.get("/user");
+    const data = await axiosInstance.get(url);
     const user = data.data;
     const user_cookie = useCookie("user");
     user_cookie.value = JSON.stringify(user);

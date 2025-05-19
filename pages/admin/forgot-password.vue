@@ -3,6 +3,8 @@ definePageMeta({
   layout: "auth",
 });
 
+const loading = ref(false);
+
 const form = ref({
   email: "",
 });
@@ -11,11 +13,14 @@ const errors = ref({
 });
 
 async function onSubmit(){
+  loading.value = true;
   try {
     await axiosInstance.post("/admin/forgot-password", form.value);
     useSweetAlert('success', 'Email sent', 'Please check your email for the reset password link');
+    loading.value = false;
   } catch (error) {
     handleAxiosError(error);
+    loading.value = false;
   }
 }
 </script>
@@ -35,7 +40,8 @@ async function onSubmit(){
           name="email"
           :error="errors.email" />
       </div>
-      <div class="mb-3">
+      <UiLoading v-if="loading" />
+      <div class="mb-3" v-else>
         <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Resset password</button>
       </div>
     </form>

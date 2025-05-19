@@ -6,6 +6,8 @@ export default function useGetUser() {
 
   try {
     user = userCookie.value ? (userCookie.value as TUser) : null;
+    if (user) {
+    }
   } catch (error) {
     console.error("Failed to parse user cookie:", error);
   }

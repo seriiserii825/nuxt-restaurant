@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const show = ref(false);
-const avatar_img = ref('/backend/assets/images/users/avatar-1.jpg');
+const avatar_img = ref("/backend/assets/images/users/avatar-1.jpg");
 </script>
 
 <template>
@@ -13,19 +13,16 @@ const avatar_img = ref('/backend/assets/images/users/avatar-1.jpg');
       data-bs-toggle="dropdown"
       aria-haspopup="true"
       aria-expanded="false">
-      <img
-        class="rounded-circle header-profile-user"
-        :src="avatar_img"
-        alt="Header Avatar" />
+      <img class="rounded-circle header-profile-user" :src="avatar_img" alt="Header Avatar" />
       <span class="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
       <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
     </button>
     <div class="dropdown-menu dropdown-menu-end" :class="{ show: show }">
       <!-- item-->
-      <a class="dropdown-item" href="apps-contacts-profile.html">
+      <NuxtLink class="dropdown-item" to="/admin/profile">
         <i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i>
         Profile
-      </a>
+      </NuxtLink>
       <a class="dropdown-item" href="auth-lock-screen.html">
         <i class="mdi mdi-lock font-size-16 align-middle me-1"></i>
         Lock Screen
